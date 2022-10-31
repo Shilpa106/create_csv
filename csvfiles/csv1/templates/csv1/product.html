@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details</title>
+</head>
+<body>
+<h1>upload csv file</h1>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label>Upload a file</label><br>
+    <input type="file" name="file"><br>
+    <p>Only accept csv file</p>
+    <input type="submit" value="Upload file">
+</form>
+      <h2>Product Details</h2>
+       <table>
+           <tr>
+               <th>Product Name</th>
+               <th>Product Price</th>
+               <th>Product Date</th>
+           </tr>
+           {% for fm in form %}
+           <tr>
+               <td>{{fm.name}}</td>
+               <td>{{fm.price}}</td>
+               <td>{{fm.purchase_date}}</td>
+           </tr>
+           {% endfor %}
+       </table>
+{% if messages %}
+     {% for message in messages %}
+         <small {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</small>
+     {% endfor %}
+{% endif %}
+</body>
+</html>
